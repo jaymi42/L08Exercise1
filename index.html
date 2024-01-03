@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>About Me</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sanchez&family=Space+Mono&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+</head>
+<style>
+    h1 {
+        font-family: "Sanchez", sans-serif;
+    }
+
+    #restart-button {
+        background-color: black;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    #restart-button:hover {
+        background-color: #333; /* Darker shade on hover */
+    }
+</style>
+<body>
+<h1 id="main-heading" style="text-align: center;">About Me</h1>
+<div class="content" style="display:flex;align-items: center;justify-content: center;text-align: center;">
+    <img id="profile-img" src="images/image0.jpg" height="800" style="margin: 20px;" alt="Me">
+    <div id="content-div" style="flex-direction: column;font-size: 20px;">
+        <h2 id="name">Jaymi Tan</h2>
+        <h3 id="username"><u>@jaymi</u></h3>
+        <p id="intro">My name is Jaymi and I am a student<br> that is currently studying for a Diploma in Digital <br>  Design and Development in Republic Polytechnic. </p>
+        <p id="interest">In my free time, I like to play football<br> as it allows me to work on my communication<br> with others and my concentration as well.</p>
+        <p id="counter">Useless number counter: <span id="number-counter">100</span></p>
+        <br/>
+        <button id="restart-button">Restart</button>
+    </div>
+</div>
+
+<script>
+    const timeline = anime.timeline({
+        easing: 'easeOutExpo',
+        duration: 1000,
+        autoplay: true 
+    })
+    .add({
+        targets: '#main-heading',
+        opacity: [0, 1],
+        translateY: [-50, 0]
+    })
+    .add({
+        targets: '#profile-img',
+        opacity: [0, 1],
+        translateY: [50, 0]
+    })
+    .add({
+        targets: '#name, #username',
+        opacity: [0, 1],
+        translateY: [50, 0],
+        delay: anime.stagger(100)
+    })
+    .add({
+        targets: '#intro, #interest',
+        opacity: [0, 1],
+        translateY: [50, 0],
+        delay: anime.stagger(100, { start: 500 })
+    });
+
+    function animateCounter(fromValue, toValue) {
+        anime({
+            targets: document.getElementById('number-counter'),
+            textContent: [fromValue, toValue],
+            round: 1,
+            easing: 'linear',
+            duration: 2000,
+            autoplay: true
+        });
+    }
+
+    animateCounter(100, 500);
+
+    document.getElementById('restart-button').addEventListener('click', function() {
+        animateCounter(100, 500);
+        timeline.restart();
+    });
+
+    document.getElementById('profile-img').addEventListener('click', function() {
+        anime({
+            targets: '#profile-img',
+            opacity: [0, 1],
+            translateY: [50, 0],
+            duration: 1000,
+            delay: 150,
+            autoplay: true
+        });
+    });
+</script>
+</body>
+</html>
+
